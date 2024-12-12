@@ -1,0 +1,17 @@
+{
+  "name": "flamapy-npm",
+  "version": "1.0.0",
+  "description": "Prueba de integración de Flamapy con Pyodide",
+  "main": "src/js/pyodide.js",
+  "scripts": {
+    "start": "npx http-server public",
+    "test": "echo 'Tests por implementar'"
+  },
+  "files": [
+    "src/js/*",
+    "src/py/*"
+  ],
+  "keywords": ["flamapy", "pyodide", "npm", "wasm"],
+  "author": "Tu Nombre",
+  "license": "MIT"
+}

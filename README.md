@@ -1,1 +1,5 @@
 # flamassembly
+
+```
+npx http-server .
+```
