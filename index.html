@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pyodide Flamapy</title>
     <script src="https://cdn.jsdelivr.net/pyodide/v0.23.3/full/pyodide.js"></script>
-    <script src="./pyodide.js"></script>
+    <script src="./ui.js"></script>
+    <script src="./flamapy.js"></script>
 </head>
 <body>
     <h1>Pyodide + Flamapy Runner</h1>
@@ -58,18 +59,18 @@ constraints
     LOW => !Backup</textarea>
         
         <div>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('configurations')" disabled="">Get configurations</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('satisfiable')" disabled="">Is satisfiable?</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('configurations_number')" disabled="">How many products there are?</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('atomic_sets')" disabled="">atomic_sets</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('average_branching_factor')" disabled="">average_branching_factor</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('count_leafs')" disabled="">count_leafs</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('estimated_number_of_configurations')" disabled="">estimated_number_of_configurations</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('leaf_features')" disabled="">leaf_features</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('max_depth')" disabled="">max_depth</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('core_features')" disabled="">core_features</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('dead_features')" disabled="">dead_features</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="flamapy('false_optional_features')" disabled="">false_optional_features</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('configurations')" disabled="">Get configurations</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('satisfiable')" disabled="">Is satisfiable?</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('configurations_number')" disabled="">How many products there are?</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('atomic_sets')" disabled="">atomic_sets</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('average_branching_factor')" disabled="">average_branching_factor</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('count_leafs')" disabled="">count_leafs</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('estimated_number_of_configurations')" disabled="">estimated_number_of_configurations</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('leaf_features')" disabled="">leaf_features</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('max_depth')" disabled="">max_depth</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('core_features')" disabled="">core_features</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('dead_features')" disabled="">dead_features</button>
+            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('false_optional_features')" disabled="">false_optional_features</button>
         </div>
         
         <div>
@@ -81,8 +82,7 @@ constraints
         </div>
         <script>
             document.addEventListener('DOMContentLoaded', (event) => {
-                preparare_WASM()
-                
+                prepareWASM()
             });
         </script>
 
