@@ -1,19 +1,21 @@
 {
   "name": "flamassembly",
   "version": "1.0.0",
-  "description": "Librería WASM con Pyodide para ejecutar Flamapy.",
-  "main": "src/flamapy.js",
+  "description": "User interface for running Flamapy with Pyodide",
+  "main": "src/js/flamapy.js",
   "scripts": {
-    "start": "http-server . -p 8080",
-    "test": "echo 'No tests yet'"
+      "start": "http-server ./",
+      "build": "echo 'No build step required'",
+      "test": "echo 'No tests yet'"
   },
   "files": [
-    "src/"
+      "src/js/",
+      "src/py/"
   ],
   "keywords": ["flamapy", "pyodide", "wasm", "feature-model"],
-  "author": "Tu Nombre",
+  "author": "Diverso Lab",
   "license": "MIT",
   "devDependencies": {
-    "http-server": "^14.1.1"
+      "http-server": "^14.1.1"
   }
 }

@@ -3,9 +3,11 @@ from collections.abc import Iterable
 from flamapy.interfaces.python.flamapy_feature_model import FLAMAFeatureModel
 import inspect
 
+
 def requires_with_sat(method):
     signature = inspect.signature(method)
     return 'with_sat' in signature.parameters
+
 
 def run_flamapy_method(param, callback):
     file_content = js.document.getElementById('uvlfile').value
@@ -22,4 +24,4 @@ def run_flamapy_method(param, callback):
     if isinstance(result, Iterable):
         result = "<br>".join([f'P({i}): {p}' for i, p in enumerate(result, 1)])
 
-    callback(result)  # Usar la función callback proporcionada desde JavaScript
+    callback(result)

@@ -1,7 +1,8 @@
-import { prepareWASM, runFlamapyMethod } from "./src/flamapy.js";
+import { prepareWASM, runFlamapyMethod } from "./src/js/flamapy.js";
 import { showLoading, hideLoading, enableOperationButtons, updateResult } from "./ui.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+    
     prepareWASM(enableOperationButtons);
 
     document.querySelectorAll('.operation').forEach(button => {
