@@ -11,28 +11,32 @@ const loadAndRunPythonScript = async (scriptPath, functionCall) => {
     }
 };
 
-const prepareWASM = async () => {
+export const prepareWASM = async (onReadyCallback) => {
     try {
         pyodide = await loadPyodide();
         await pyodide.loadPackage("micropip");
         console.log("Micropip cargado.");
 
-        await loadAndRunPythonScript("packages.py", "await install_flamapy_packages()");
+        await loadAndRunPythonScript("src/packages.py", "await install_flamapy_packages()");
         console.log("Paquetes de Flamapy instalados.");
 
-        enableOperationButtons();
+        if (onReadyCallback && typeof onReadyCallback === "function") {
+            console.log("calling onReadyCallback in prepareWASM");
+            onReadyCallback();
+        }
     } catch (err) {
         console.error("Error preparando Pyodide y Flamapy:", err);
     }
 };
 
-const runFlamapyMethod = async (param) => {
-    showLoading();
+export const runFlamapyMethod = async (param, showLoadingCallback, hideLoadingCallback) => {
+    if (showLoadingCallback) showLoadingCallback();
+
     try {
-        await loadAndRunPythonScript("flamapy_methods.py", `run_flamapy_method("${param}")`);
+        await loadAndRunPythonScript("src/flamapy_methods.py", `run_flamapy_method("${param}")`);
     } catch (err) {
         console.error("Error ejecutando Flamapy:", err);
     } finally {
-        hideLoading();
+        if (hideLoadingCallback) hideLoadingCallback();
     }
 };

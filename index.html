@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pyodide Flamapy</title>
     <script src="https://cdn.jsdelivr.net/pyodide/v0.23.3/full/pyodide.js"></script>
-    <script src="./ui.js"></script>
-    <script src="./flamapy.js"></script>
+    <script type="module" src="./index.js"></script>
 </head>
 <body>
     <h1>Pyodide + Flamapy Runner</h1>
@@ -58,20 +57,45 @@ constraints
     Mobile => HIGH
     LOW => !Backup</textarea>
         
-        <div>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('configurations')" disabled="">Get configurations</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('satisfiable')" disabled="">Is satisfiable?</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('configurations_number')" disabled="">How many products there are?</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('atomic_sets')" disabled="">atomic_sets</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('average_branching_factor')" disabled="">average_branching_factor</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('count_leafs')" disabled="">count_leafs</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('estimated_number_of_configurations')" disabled="">estimated_number_of_configurations</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('leaf_features')" disabled="">leaf_features</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('max_depth')" disabled="">max_depth</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('core_features')" disabled="">core_features</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('dead_features')" disabled="">dead_features</button>
-            <button class="operation btn btn-light mr-2 mb-2" onclick="runFlamapyMethod('false_optional_features')" disabled="">false_optional_features</button>
-        </div>
+    <div>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="configurations" disabled>
+            Get configurations
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="satisfiable" disabled>
+            Is satisfiable?
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="configurations_number" disabled>
+            How many products there are?
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="atomic_sets" disabled>
+            atomic_sets
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="average_branching_factor" disabled>
+            average_branching_factor
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="count_leafs" disabled>
+            count_leafs
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="estimated_number_of_configurations" disabled>
+            estimated_number_of_configurations
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="leaf_features" disabled>
+            leaf_features
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="max_depth" disabled>
+            max_depth
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="core_features" disabled>
+            core_features
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="dead_features" disabled>
+            dead_features
+        </button>
+        <button class="operation btn btn-light mr-2 mb-2" data-param="false_optional_features" disabled>
+            false_optional_features
+        </button>
+    </div>
+    
         
         <div>
             <h2>The output is:</h2>
@@ -80,12 +104,6 @@ constraints
         </div>
         
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', (event) => {
-                prepareWASM()
-            });
-        </script>
-
 
 </body>
 </html>

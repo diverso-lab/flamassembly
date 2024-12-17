@@ -1,31 +1,23 @@
-// Archivo: ui.js
-
-const uvlfile = document.getElementById("uvlfile");
-
-function showLoading() {
+export const showLoading = () => {
     document.getElementById("loading").style.display = "initial";
-}
+};
 
-function hideLoading() {
+export const hideLoading = () => {
     document.getElementById("loading").style.display = "none";
-}
+};
 
-function enableOperationButtons() {
-    const operationButtons = document.querySelectorAll('.operation');
-    operationButtons.forEach(button => {
-        button.disabled = false;
-    });
-}
+export const enableOperationButtons = () => {
+    console.log("activating enableOperationButtons");
+    document.querySelectorAll('.operation').forEach(button => button.disabled = false);
+};
 
-function updateResult(content) {
+export const updateResult = (content) => {
+    const resultContainer = document.getElementById("result");
+    const existingResult = document.getElementById("deleteme");
+    if (existingResult) existingResult.remove();
+
     const div = document.createElement("div");
     div.id = "deleteme";
     div.innerHTML = content;
-
-    const existingResult = document.getElementById("deleteme");
-    if (existingResult) {
-        existingResult.remove();
-    }
-
-    document.getElementById("result").append(div);
-}
+    resultContainer.append(div);
+};
