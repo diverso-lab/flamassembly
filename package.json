@@ -1,18 +1,19 @@
 {
-  "name": "flamapy-wasm-ui",
+  "name": "flamassembly",
   "version": "1.0.0",
-  "description": "Interfaz de usuario para ejecutar Flamapy con Pyodide",
-  "main": "index.js",
+  "description": "Librería WASM con Pyodide para ejecutar Flamapy.",
+  "main": "src/flamapy.js",
   "scripts": {
-      "start": "http-server ./",
-      "build": "echo 'No build step required'",
-      "test": "echo 'No tests yet'"
+    "start": "http-server . -p 8080",
+    "test": "echo 'No tests yet'"
   },
-  "dependencies": {
-      "http-server": "^14.1.1"
-  },
-  "devDependencies": {},
-  "keywords": ["flamapy", "wasm", "pyodide", "ui"],
+  "files": [
+    "src/"
+  ],
+  "keywords": ["flamapy", "pyodide", "wasm", "feature-model"],
   "author": "Tu Nombre",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
 }

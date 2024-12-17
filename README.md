@@ -4,7 +4,8 @@
 sudo apt install npm
 ```
 
+Run server in dev mode:
 
 ```
-npx http-server .
+npm start
 ```
