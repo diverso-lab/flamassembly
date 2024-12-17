@@ -21,7 +21,6 @@ export const prepareWASM = async (onReadyCallback) => {
         console.log("Paquetes de Flamapy instalados.");
 
         if (onReadyCallback && typeof onReadyCallback === "function") {
-            console.log("calling onReadyCallback in prepareWASM");
             onReadyCallback();
         }
     } catch (err) {
@@ -29,11 +28,17 @@ export const prepareWASM = async (onReadyCallback) => {
     }
 };
 
-export const runFlamapyMethod = async (param, showLoadingCallback, hideLoadingCallback) => {
+export const runFlamapyMethod = async (param, showLoadingCallback, hideLoadingCallback, resultCallback) => {
     if (showLoadingCallback) showLoadingCallback();
 
     try {
-        await loadAndRunPythonScript("src/flamapy_methods.py", `run_flamapy_method("${param}")`);
+        // Exponer la función callback en Pyodide
+        pyodide.globals.set("callback", resultCallback);
+
+        await loadAndRunPythonScript(
+            "src/flamapy_methods.py",
+            `run_flamapy_method("${param}", callback)`
+        );
     } catch (err) {
         console.error("Error ejecutando Flamapy:", err);
     } finally {
