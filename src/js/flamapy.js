@@ -1,5 +1,5 @@
 console.log("Creating the Web Worker...");
-const worker = new Worker('./src/js/pyodideWorker.js');
+const worker = new Worker(new URL('./pyodideWorker.js', import.meta.url));
 console.log("Web Worker created.");
 
 // Configure the message handler
