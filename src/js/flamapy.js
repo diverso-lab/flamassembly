@@ -31,7 +31,7 @@ export const prepareWASM = (onReadyCallback) => {
 };
 
 // Execute Flamapy methods
-export const runFlamapyMethod = (param, showLoadingCallback, hideLoadingCallback, resultCallback) => {
+export const runFlamapyMethod = (param, uvlContent, showLoadingCallback, hideLoadingCallback, resultCallback) => {
     if (showLoadingCallback) showLoadingCallback();
 
     // Store the callback for the result
@@ -45,12 +45,10 @@ export const runFlamapyMethod = (param, showLoadingCallback, hideLoadingCallback
         if (hideLoadingCallback) hideLoadingCallback();
     };
 
-    // Get the UVL file content from the DOM
-    const fileContent = document.getElementById('uvlfile').value;
-
     console.log("Sending 'runFlamapyMethod' message to the Worker...");
     worker.postMessage({
         type: "runFlamapyMethod",
-        data: { param, fileContent },
+        data: { param, fileContent: uvlContent },
     });
 };
+
