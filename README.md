@@ -50,16 +50,20 @@ http://localhost:8080
 flamassembly/
 │
 ├── package.json          # Project configuration
+├── package-lock.json     # Dependency lockfile
 ├── index.html            # Basic user interface
 ├── index.js              # Application initialization
 ├── ui.js                 # User interface logic
 ├── src/                  # Main source code
 │   ├── js/               # Main JavaScript files
-│   │   └── flamapy.js    # Pyodide and Flamapy handler
+│   │   ├── flamapy.js    # Pyodide and Flamapy handler
+│   │   └── pyodideWorker.js  # Pyodide worker script
 │   └── py/               # Python scripts executed by Pyodide
 │       ├── packages.py   # Python dependency installation
-│       └── flamapy_methods.py  # Main Flamapy logic
-└── node_modules/         # Local dependencies
+│       ├── flamapy_methods.py  # Main Flamapy logic
+├── dist/                 # Compiled assets
+└── node_modules/         # Node.js dependencies
+
 ```
 
 ## Contribution

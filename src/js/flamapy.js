@@ -1,45 +1,56 @@
-let pyodide;
+console.log("Creating the Web Worker...");
+const worker = new Worker('./src/js/pyodideWorker.js');
+console.log("Web Worker created.");
 
-const loadAndRunPythonScript = async (scriptPath, functionCall) => {
-    try {
-        const response = await fetch(scriptPath);
-        const pythonScript = await response.text();
-        await pyodide.runPythonAsync(`${pythonScript}\n${functionCall}`);
-    } catch (err) {
-        console.error(`Error executing Python script from ${scriptPath}:`, err);
-        throw err;
+// Configure the message handler
+worker.onmessage = (event) => {
+    console.log("Message received from the Worker:", event.data);
+
+    const { type, message, result } = event.data;
+
+    if (type === "ready") {
+        console.log("Pyodide is ready.");
+        if (worker.onReadyCallback) worker.onReadyCallback(); // Call the preparation callback
+    } else if (type === "result") {
+        console.log("Result received from the Worker:", result);
+        if (worker.onResultCallback) worker.onResultCallback(result);
+    } else if (type === "error") {
+        console.error("Error in the Worker:", message);
+        if (worker.onErrorCallback) worker.onErrorCallback(message);
+    } else {
+        console.warn("Unknown message type:", type);
     }
 };
 
-export const prepareWASM = async (onReadyCallback) => {
-    try {
-        pyodide = await loadPyodide();
-        await pyodide.loadPackage("micropip");
-
-        await loadAndRunPythonScript("src/py/packages.py", "await install_flamapy_packages()");
-
-        if (onReadyCallback && typeof onReadyCallback === "function") {
-            onReadyCallback();
-        }
-    } catch (err) {
-        console.error("Error preparing Pyodide and Flamapy:", err);
-    }
+// Prepare Pyodide and load packages
+export const prepareWASM = (onReadyCallback) => {
+    console.log("Sending 'prepareWASM' message to the Worker...");
+    worker.onReadyCallback = onReadyCallback; // Store the callback
+    worker.postMessage({ type: "prepareWASM" });
+    console.log("Sent 'prepareWASM' message to the Worker...");
 };
 
-export const runFlamapyMethod = async (param, showLoadingCallback, hideLoadingCallback, resultCallback) => {
+// Execute Flamapy methods
+export const runFlamapyMethod = (param, showLoadingCallback, hideLoadingCallback, resultCallback) => {
     if (showLoadingCallback) showLoadingCallback();
 
-    try {
-        // Expose the callback function in Pyodide
-        pyodide.globals.set("callback", resultCallback);
-
-        await loadAndRunPythonScript(
-            "src/py/flamapy_methods.py",
-            `run_flamapy_method("${param}", callback)`
-        );
-    } catch (err) {
-        console.error("Error running Flamapy:", err);
-    } finally {
+    // Store the callback for the result
+    worker.onResultCallback = (result) => {
+        if (resultCallback) resultCallback(result);
         if (hideLoadingCallback) hideLoadingCallback();
-    }
+    };
+
+    worker.onErrorCallback = (message) => {
+        console.error("Error executing method:", message);
+        if (hideLoadingCallback) hideLoadingCallback();
+    };
+
+    // Get the UVL file content from the DOM
+    const fileContent = document.getElementById('uvlfile').value;
+
+    console.log("Sending 'runFlamapyMethod' message to the Worker...");
+    worker.postMessage({
+        type: "runFlamapyMethod",
+        data: { param, fileContent },
+    });
 };
