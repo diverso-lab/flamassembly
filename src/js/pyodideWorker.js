@@ -1,6 +1,6 @@
-console.log("Importing Pyodide from CDN.");
-importScripts("https://cdn.jsdelivr.net/pyodide/v0.23.3/full/pyodide.js");
-console.log("Pyodide imported from CDN.");
+console.log("Importing Pyodide");
+importScripts("../pyodide/pyodide.js");
+console.log("Pyodide imported");
 
 let pyodide;
 
